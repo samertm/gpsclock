@@ -18,7 +18,7 @@ static const int kTimeNeedsSync = 1;
 static const int kTimeDateInvalid = 2;
 static const int kTimeValid = 3;
 
-static const unsigned long kSyncIntervalMS = 2 * 60 * 1000;
+static const unsigned long kSyncIntervalMS = 2 * 60 * 1000UL;
 
 static int displayTimeStatus = kTimeNotSet;
 
@@ -122,15 +122,14 @@ void setTime() {
   if (!gps.time.isUpdated() || !gps.date.isUpdated()) {
     return;
   }
-  
+
   if (displayTimeStatus == kTimeValid &&
       (millis() - prevMillis) < kSyncIntervalMS) {
     return;
   }
 
-  if (true || kDebug) {
-    Serial.println("Syncing GPS time.");
-  }
+
+  Serial.println("Syncing GPS time.");
   displayTimeStatus = syncGPSTime();
   if (displayTimeStatus == kTimeNeedsSync) {
     return;
@@ -155,9 +154,7 @@ void setup() {
 
   Serial.begin(9600);
   serial_connection.begin(9600);
-  if (kDebug) {
-    Serial.println("GPS Start");
-  }
+  Serial.println("GPS Start");
 }
 
 void loop() {
