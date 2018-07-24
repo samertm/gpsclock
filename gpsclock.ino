@@ -161,7 +161,7 @@ void loop() {
   // Premature optimization: have two versions of this loop, one for
   // debug and one for prod, so there isn't an `if` statement in the
   // middle of a hot loop.
-  if (true || kDebug) {
+  if (kDebug) {
     while(serial_connection.available()) {
       char c = serial_connection.read();
       Serial.write(c);
